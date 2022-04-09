@@ -1,4 +1,4 @@
-TOKEN = '5133863459:AAEA4bOXqcxOkl3FKcXStfQJyTYZ5eEm1m8'
+TOKEN = '5222080467:AAGyE02fYaor0H2cqaxMXD-Yjn32vwak7AY'
 
 import os
 import uuid
@@ -68,18 +68,16 @@ def menu(update: Update, context: CallbackContext) -> int:
 
     query = update.callback_query
     keyboard = [
-        [
-            InlineKeyboardButton("Получить короткую ссылку", callback_data=str(GET_LINK)),
-            InlineKeyboardButton("Подписаться на PREMIUM", callback_data=str(SUB_PREMIUN)),
-        ]
+        [InlineKeyboardButton("Получить короткую ссылку", callback_data=str(GET_LINK)),],
+        [InlineKeyboardButton("Подписаться на PREMIUM", callback_data=str(SUB_PREMIUN)),]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     bot = Bot(token=TOKEN)
-    bot.sendMessage(chat_id=query.message.chat.id, text='Подписка на PREMIUM 1$ в месяц:\n'
-                              '1) Можно безлимитно пользоваться ботом\n'
-                              '2) Ссылки не будут иметь срок годности\n'
-                              '3) Вы получите статистику по переходам\n', reply_markup=reply_markup)
+    bot.sendMessage(chat_id=query.message.chat.id, text='Подписка на PREMIUM\n'
+                              '- статистика по переходам\n'
+                              '- возможность называть ссылки как угодно\n'
+                              '- на ссылку так же можно получить QR код', reply_markup=reply_markup)
     return ASK_LINK
 
 
