@@ -1,11 +1,13 @@
 TOKEN = '5222080467:AAGyE02fYaor0H2cqaxMXD-Yjn32vwak7AY'
-
+# TOKEN = '5133863459:AAEA4bOXqcxOkl3FKcXStfQJyTYZ5eEm1m8'
 import os
 import uuid
 import json
 import urllib
 import requests
 import logging
+
+import mysql.connector
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update, Bot
 from telegram.ext import (
     Updater,
@@ -13,6 +15,13 @@ from telegram.ext import (
     CallbackQueryHandler,
     ConversationHandler,
     CallbackContext, MessageHandler, Filters
+)
+
+mydb = mysql.connector.connect(
+  database='u1650045_default',
+  host="cutlinks.ru",
+  user="u1650045_default",
+  password="mqGIBF31HU1x8zxo"
 )
 
 # Enable logging
@@ -47,6 +56,15 @@ def shorten_link(link):
     return short_link
 
 
+def cutlinks(long_link, username):
+    hash = uuid.uuid4().hex[:4]
+    mycursor = mydb.cursor()
+    mycursor.execute(f"""INSERT links(link_id, link, username)
+    VALUES ('{hash}', '{long_link}', '{username}')""")
+    mydb.commit()
+    return f'http://cutlinks.ru/{hash}'
+
+
 def start(update: Update, context: CallbackContext) -> int:
     """Send message on `/start`."""
 
@@ -59,7 +77,7 @@ def start(update: Update, context: CallbackContext) -> int:
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text("Приыет! Вы можете отправить мне ссылку, а я сделаю ее короче!", reply_markup=reply_markup)
+    update.message.reply_text("Привет! Вы можете отправить мне ссылку, а я сделаю ее короче!", reply_markup=reply_markup)
     return ASK_LINK
 
 
@@ -90,6 +108,7 @@ def shortlink_ask(update: Update, context: CallbackContext) -> int:
 
 
 def shortlink_send(update: Update, context: CallbackContext) -> int:
+    print(update)
     """Show new choice of buttons"""
     keyboard = [
         [
@@ -97,7 +116,7 @@ def shortlink_send(update: Update, context: CallbackContext) -> int:
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text(shorten_link(update.message.text), reply_markup=reply_markup)
+    update.message.reply_text(cutlinks(update.message.text, update.message.chat.username), reply_markup=reply_markup)
     return MENU
 
 
