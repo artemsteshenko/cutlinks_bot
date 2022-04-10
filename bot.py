@@ -58,6 +58,8 @@ def shorten_link(link):
 
 def cutlinks(long_link, username):
     hash = uuid.uuid4().hex[:4]
+
+    mydb.reconnect()
     mycursor = mydb.cursor()
     mycursor.execute(f"""INSERT links(link_id, link, username)
     VALUES ('{hash}', '{long_link}', '{username}')""")
@@ -108,7 +110,6 @@ def shortlink_ask(update: Update, context: CallbackContext) -> int:
 
 
 def shortlink_send(update: Update, context: CallbackContext) -> int:
-    print(update)
     """Show new choice of buttons"""
     keyboard = [
         [
