@@ -89,15 +89,16 @@ def menu(update: Update, context: CallbackContext) -> int:
     query = update.callback_query
     keyboard = [
         [InlineKeyboardButton("Получить короткую ссылку", callback_data=str(GET_LINK)),],
-        [InlineKeyboardButton("Подписаться на PREMIUM", callback_data=str(SUB_PREMIUN)),]
+        # [InlineKeyboardButton("Подписаться на PREMIUM", callback_data=str(SUB_PREMIUN)),]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     bot = Bot(token=TOKEN)
-    bot.sendMessage(chat_id=query.message.chat.id, text='Подписка на PREMIUM\n'
-                              '- статистика по переходам\n'
-                              '- возможность называть ссылки как угодно\n'
-                              '- на ссылку так же можно получить QR код', reply_markup=reply_markup)
+    bot.sendMessage(chat_id=query.message.chat.id, text='Ограничений на действие ссылки нет:) Можете пользоваться нашим сервисом совершенно  бесплатно\n'
+                              # '- статистика по переходам\n'
+                              # '- возможность называть ссылки как угодно\n'
+                              # '- на ссылку так же можно получить QR код'
+                    , reply_markup=reply_markup)
     return ASK_LINK
 
 
