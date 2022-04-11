@@ -94,7 +94,7 @@ def menu(update: Update, context: CallbackContext) -> int:
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     bot = Bot(token=TOKEN)
-    bot.sendMessage(chat_id=query.message.chat.id, text='Ограничений на действие ссылки нет:) Можете пользоваться нашим сервисом совершенно  бесплатно\n'
+    bot.sendMessage(chat_id=query.message.chat.id, text='Ограничений на действие ссылки нет:) Можете пользоваться нашим сервисом совершенно бесплатно. Для возобновления нажмите /start\n'
                               # '- статистика по переходам\n'
                               # '- возможность называть ссылки как угодно\n'
                               # '- на ссылку так же можно получить QR код'
@@ -114,7 +114,7 @@ def shortlink_send(update: Update, context: CallbackContext) -> int:
     """Show new choice of buttons"""
     keyboard = [
         [
-            InlineKeyboardButton("Вернуться в меню", callback_data=str(RETURN_MENU)),
+            InlineKeyboardButton("Вернуться в меню. Или нажмите /start", callback_data=str(RETURN_MENU)),
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
