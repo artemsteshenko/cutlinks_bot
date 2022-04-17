@@ -3,6 +3,7 @@
 #### Презентация проекта http://cutlinks.ru/2223. 
 #### Сайт проекта http://cutlinks.ru. 
 #### Бот можно найти по этой ссылке https://t.me/cutlinksbot. 
+#### Доска Trello https://trello.com/b/45RgYOjc/cutlinks. 
   
 #### Правила работы:
 Для дебага:
