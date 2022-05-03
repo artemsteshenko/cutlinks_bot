@@ -114,7 +114,7 @@ def shortlink_send(update: Update, context: CallbackContext) -> int:
     """Show new choice of buttons"""
     keyboard = [
         [
-            InlineKeyboardButton("Mеню / To menu and get statistics. Или нажмите /start", callback_data=str(RETURN_MENU)),
+            InlineKeyboardButton("Mеню / Menu-statistics. /start", callback_data=str(RETURN_MENU)),
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
