@@ -46,7 +46,7 @@ def shorten_link(link):
     hostname = urllib.parse.urlparse(link).hostname
 
     if hostname is None:
-        return 'Необходимо отправить действительную ссылку'
+        return 'Необходимо отправить действительную ссылку / Please, send real link'
 
     hostname = hostname.split('.')[-2]
     name = f'{hostname}-{hash}'
@@ -75,11 +75,11 @@ def start(update: Update, context: CallbackContext) -> int:
 
     keyboard = [
         [
-            InlineKeyboardButton("Получить короткую ссылку", callback_data=str(GET_LINK)),
+            InlineKeyboardButton("Получить короткую ссылку / Get short link", callback_data=str(GET_LINK)),
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
-    update.message.reply_text("Привет! Вы можете отправить мне ссылку, а я сделаю ее короче!", reply_markup=reply_markup)
+    update.message.reply_text("Hello! I make your link shorter! Вы можете отправить мне ссылку, а я сделаю ее короче!", reply_markup=reply_markup)
     return ASK_LINK
 
 
@@ -88,13 +88,13 @@ def menu(update: Update, context: CallbackContext) -> int:
 
     query = update.callback_query
     keyboard = [
-        [InlineKeyboardButton("Получить короткую ссылку", callback_data=str(GET_LINK)),],
+        [InlineKeyboardButton("Получить короткую ссылку / Get short link", callback_data=str(GET_LINK)),],
         # [InlineKeyboardButton("Подписаться на PREMIUM", callback_data=str(SUB_PREMIUN)),]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
 
     bot = Bot(token=TOKEN)
-    bot.sendMessage(chat_id=query.message.chat.id, text='Ограничений на действие ссылки нет:) Можете пользоваться нашим сервисом совершенно бесплатно. Для возобновления нажмите /start\n'
+    bot.sendMessage(chat_id=query.message.chat.id, text='Статистика тут / Statistic of clicks http://cutlinks.ru/statistic. Для возобновления нажмите /start\n'
                               # '- статистика по переходам\n'
                               # '- возможность называть ссылки как угодно\n'
                               # '- на ссылку так же можно получить QR код'
@@ -106,7 +106,7 @@ def shortlink_ask(update: Update, context: CallbackContext) -> int:
     """Show new choice of buttons"""
     query = update.callback_query
     bot = Bot(token=TOKEN)
-    bot.sendMessage(chat_id=query.message.chat.id, text='Отправьте ссылку')
+    bot.sendMessage(chat_id=query.message.chat.id, text='Отправьте ссылку / Send link')
     return SEND_LINK
 
 
@@ -114,7 +114,7 @@ def shortlink_send(update: Update, context: CallbackContext) -> int:
     """Show new choice of buttons"""
     keyboard = [
         [
-            InlineKeyboardButton("Вернуться в меню. Или нажмите /start", callback_data=str(RETURN_MENU)),
+            InlineKeyboardButton("Вернуться в меню / To menu. Или нажмите /start", callback_data=str(RETURN_MENU)),
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
