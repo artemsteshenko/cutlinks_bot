@@ -106,7 +106,7 @@ def shortlink_ask(update: Update, context: CallbackContext) -> int:
     """Show new choice of buttons"""
     query = update.callback_query
     bot = Bot(token=TOKEN)
-    bot.sendMessage(chat_id=query.message.chat.id, text='Отправьте ссылку / Send link')
+    bot.sendMessage(chat_id=query.message.chat.id, text='Отправьте ссылку / Send me your link')
     return SEND_LINK
 
 
@@ -114,7 +114,7 @@ def shortlink_send(update: Update, context: CallbackContext) -> int:
     """Show new choice of buttons"""
     keyboard = [
         [
-            InlineKeyboardButton("Вернуться в меню / To menu. Или нажмите /start", callback_data=str(RETURN_MENU)),
+            InlineKeyboardButton("Mеню / To menu and get statistics. Или нажмите /start", callback_data=str(RETURN_MENU)),
         ]
     ]
     reply_markup = InlineKeyboardMarkup(keyboard)
